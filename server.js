@@ -59,6 +59,27 @@
 
     });
 
+//DELETE /todos/:id
+app.delete('/todos/:id',function(req,res){
+        var todoId=parseInt(req.params.id);
+        var matchTodo= _.findWhere(todos,{id: todoId});
+       // res.send("Todo item with id: "+todoId);
+
+    //    for(var i=0; i<todos.length; i++){
+    //        if(todos[i].id===todoId){
+    //            matchTodo=todos[i];
+    //        }
+    //    }
+        if(!matchTodo){
+            res.status(404).send();
+        }
+    todos=_.without(todos,matchTodo);
+        res.json(matchTodo);
+
+
+    });
+
+
     app.listen(PORT,function(){
        console.log('Express listening on port:: '+PORT);
 
